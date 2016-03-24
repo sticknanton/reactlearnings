@@ -4,7 +4,7 @@
     <script src="https://fb.me/react-dom-0.14.7.js"></script>
     <script src="https://fb.me/JSXTransformer-0.12.2.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <title>Thumbnail</title>
+    <title>Thumbnail List</title>
   </head>
   <body>
     <div class="container">
@@ -42,16 +42,35 @@
       }
     });
 
+    var ThumbnailList = React.createClass({
+      render: function () {
+        var list = this.props.thumbnailData.map(function (thumbnailProps) {
+          return <Thumbnail {...thumbnailProps} />
+        });
+        return <div>
+          {list}
+        </div>
+      }
+    })
+
     var options = {
-      title: "Inbox",
-      number: 32,
-      header: "Learn React",
-      description: "React is a fantastic library for making fast cynamic pages. React is a fantastic library for making fast cynamic pages. ",
-      imageUrl: 'http://formatjs.io/img/react.svg'
-    };
+      thumbnailData: [{
+        title: "Inbox",
+        number: 32,
+        header: "Learn React",
+        description: "React is a fantastic library for making fast dynamic pages. React is a fantastic library for making fast dynamic pages. ",
+        imageUrl: 'http://formatjs.io/img/react.svg'
+      },{
+        title: "Sent",
+        number: 14,
+        header: "Learn Gulp",
+        description: "Gulp will speed up your development workflow. Gulp will speed up your development workflow. ",
+        imageUrl: 'https://avatars0.githubusercontent.com/u/6200624?v=3&s=400'
+      }]
+  }
 
     // ask react to render the class
-    var element = React.createElement(Thumbnail, options);
+    var element = React.createElement(ThumbnailList, options);
 
     // tell it where to place the rendered element in the DOM
     ReactDOM.render(element, document.querySelector('.target'))
